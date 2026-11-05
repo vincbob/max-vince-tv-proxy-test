@@ -20,3 +20,5 @@ jobs:
           node --check media-check.js
       - name: Simuler le navigateur sans secrets
         run: node --test tests/proxy-lab.test.js tests/direct-check.test.js tests/media-check.test.js
+      - name: Vérifier la disponibilité de véritables sources LIVE publiques
+        run: node scripts/verify-public-live.mjs
