@@ -38,7 +38,7 @@ test('Hisense 58E77Q : reconnait V0000.09.60V.Q0612 sans promettre de compatibil
  assert.match(output,/VIDAA U9/);
  assert.match(output,/accès système bloqué/);
  assert.match(output,/version documentée/);
- assert.match(output,/Aucune installation native indépendante validée/);
+ assert.match(output,/Aucune méthode native validée/);
  nodes.get('model').value='MODELE-INCONNU';
  nodes.get('compare').listeners.click();
  assert.match(nodes.get('result').textContent,/firmware 09\.60V\.Q0612 est documenté/);
