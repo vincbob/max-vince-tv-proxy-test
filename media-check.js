@@ -7,7 +7,9 @@
     vod: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
     ts360: 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/v3/prog_index.m3u8',
     mp4360: 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/v3/prog_index.m3u8',
-    live: 'https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8'
+    live: 'https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8',
+    france24: 'https://live.france24.com/hls/live/2037179/F24_FR_HI_HLS/master_500.m3u8',
+    france24backup: 'https://live.france24.com/hls/live/2037179-b/F24_FR_HI_HLS/master_500.m3u8'
   };
   var v = $('mediaTestVideo'), active = '', started = false, hasFrames = false;
   function status(message, css) {
@@ -41,7 +43,9 @@
     v.muted = false;
     try { v.volume = 1; } catch (e) {}
     status('Chargement du flux public...', '');
-    var description = {vod: 'Témoin HLS déjà validé', ts360: 'HLS MPEG-TS 360p - AVC / AAC-LC', mp4360: 'HLS fMP4 360p - AVC / AAC-LC', live: 'Ancien LIVE public 1080p - source suspecte (playlist secondaire HTTP 404)'}[kind];
+    var description = {vod: 'Témoin HLS déjà validé', ts360: 'HLS MPEG-TS 360p - AVC / AAC-LC', mp4360: 'HLS fMP4 360p - AVC / AAC-LC', live: 'Ancien LIVE public 1080p - source suspecte (playlist secondaire HTTP 404)',
+      france24: 'France 24 français : vrai LIVE HLS, débit 500 kb/s, segment confirmé par GitHub Actions',
+      france24backup: 'France 24 français secours : vrai LIVE HLS, débit 500 kb/s, segment confirmé par GitHub Actions'}[kind];
     note(description + '. ' + capabilities() + '. Les tests 360p sont des vidéos à la demande, PAS du LIVE. Vérifie image et son.');
     v.src = sources[kind];
     try {
@@ -75,7 +79,7 @@
     if (!active) return;
     started = true;
     status('Lecture démarrée : image et son à confirmer', 'ok');
-    note('Signal HTML5 playing reçu. Test ' + (active === 'live' ? 'LIVE public' : 'vidéo publique') +
+    note('Signal HTML5 playing reçu. Test ' + (['france24','france24backup','live'].indexOf(active) >= 0 ? 'LIVE public' : 'vidéo publique') +
       '. Vérifie visuellement la vidéo et écoute le son. ' +
       (hasFrames ? 'Premières données vidéo aussi reçues.' : 'Première image non encore signalée.'));
   });
@@ -99,6 +103,8 @@
   $('testHlsVod').addEventListener('click', function () { start('vod'); });
   $('testHlsTs').addEventListener('click', function () { start('ts360'); });
   $('testHlsFmp4').addEventListener('click', function () { start('mp4360'); });
+  $('testLiveFrance24').addEventListener('click', function () { start('france24'); });
+  $('testLiveFrance24Backup').addEventListener('click', function () { start('france24backup'); });
   $('testHlsLive').addEventListener('click', function () { start('live'); });
   $('stopHls').addEventListener('click', function () { stop(true); });
 })();
