@@ -25,8 +25,15 @@
 <p class="muted">Sources : <a href="https://www.hisense.es/wp-content/uploads/2024/03/Ficha-Tecnica_E7Q_ES.pdf">fiche officielle Hisense E7Q</a>, <a href="https://github.com/carteakey/alvidaa">inventaire communautaire alvidaa</a>.</p>
 </section>
 <section class="card">
+<h2>Test non intrusif des interfaces VIDAA</h2>
+<p>Ce contrôle inspecte seulement les <strong>noms des fonctions visibles</strong> dans la page. Il ne contacte aucun service local, ne lit aucun fichier, ne modifie aucun réglage et ne collecte pas les identifiants de la TV.</p>
+<button id="bridgeInspect" type="button">Analyser les fonctions visibles (lecture seule)</button>
+<div class="result" id="bridgeResult" role="status" aria-live="polite" style="white-space:pre-wrap;font:16px/1.6 monospace">Non testé.</div>
+<p class="muted">La présence d'une API ne prouve pas qu'elle est utilisable : les permissions peuvent être contrôlées au niveau natif. Ce diagnostic n'essaye aucun accès privilégié.</p>
+</section>
+<section class="card">
 <h2>Ce que ce contrôle ne peut pas prouver</h2>
 <p>Un firmware présent sur deux modèles ne prouve pas qu’ils utilisent la même puce ni les mêmes protections. Les installations de tuiles Sidee ne démontrent pas la possibilité d'exécuter du code natif. Même si un autre téléviseur du même modèle a été étudié, son firmware peut être différent. Aucun accès administrateur, installation native ou déverrouillage n'est validé par cette page.</p>
 <a class="back" href="./">Retour aux tests MAX &amp; VINCE TV</a>
 </section></main>
-<script src="./vidaa-compatibilite.js"></script></body></html>
+<script src="./vidaa-compatibilite.js"></script><script src="./vidaa-bridge-readonly.js"></script></body></html>

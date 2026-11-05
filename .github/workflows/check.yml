@@ -19,7 +19,8 @@ jobs:
           node --check direct-check.js
           node --check media-check.js
           node --check vidaa-compatibilite.js
+          node --check vidaa-bridge-readonly.js
       - name: Simuler le navigateur sans secrets
-        run: node --test tests/proxy-lab.test.js tests/direct-check.test.js tests/media-check.test.js tests/vidaa-compatibilite.test.js
+        run: node --test tests/proxy-lab.test.js tests/direct-check.test.js tests/media-check.test.js tests/vidaa-compatibilite.test.js tests/vidaa-bridge-readonly.test.js
       - name: Vérifier la disponibilité de véritables sources LIVE publiques
         run: node scripts/verify-public-live.mjs
