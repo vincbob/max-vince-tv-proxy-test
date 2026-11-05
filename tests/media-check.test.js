@@ -5,14 +5,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 const source = fs.readFileSync(path.join(__dirname, '..', 'media-check.js'), 'utf8');
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-for (const id of ['mediaTestVideo','mediaResult','mediaLog','testHlsVod','testHlsTs','testHlsFmp4','testHlsLive','stopHls']) {
+for (const id of ['mediaTestVideo','mediaResult','mediaLog','testHlsVod','testHlsTs','testHlsFmp4','testLiveFrance24','testLiveFrance24Backup','testHlsLive','stopHls']) {
   assert.match(html, new RegExp('id="' + id + '"'));
 }
 assert.match(html, /media-check\.js/);
 
 function env(playResult) {
   const controls = new Map();
-  for (const id of ['mediaTestVideo','mediaResult','mediaLog','testHlsVod','testHlsTs','testHlsFmp4','testHlsLive','stopHls']) {
+  for (const id of ['mediaTestVideo','mediaResult','mediaLog','testHlsVod','testHlsTs','testHlsFmp4','testLiveFrance24','testLiveFrance24Backup','testHlsLive','stopHls']) {
     controls.set(id, {
       listeners:{}, textContent:'', className:'', style:{},
       addEventListener(name,fn){this.listeners[name]=fn;},
@@ -78,4 +78,15 @@ test('erreur format ne prétend pas isoler le décodeur',()=>{
   t.video.trigger('error');
   assert.match(t.log.textContent,/source ou son format/);
   assert.match(t.log.textContent,/ne prouve pas une panne du décodeur/);
+});
+
+test('France24 principal et secours pointent vers deux véritables playlists LIVE vérifiées',()=>{
+  const t=env();
+  t.btn('testLiveFrance24').trigger('click');
+  assert.match(t.video.src,/2037179\/F24_FR_HI_HLS\/master_500.m3u8/);
+  t.video.trigger('playing');
+  assert.match(t.log.textContent,/LIVE public/);
+  t.btn('testLiveFrance24Backup').trigger('click');
+  assert.match(t.video.src,/2037179-b\/F24_FR_HI_HLS\/master_500.m3u8/);
+  assert.equal(t.video.muted,false);
 });

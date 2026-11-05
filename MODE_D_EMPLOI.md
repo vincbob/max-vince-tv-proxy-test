@@ -70,3 +70,29 @@ Dans la rubrique 4 actualisée :
 3. **Ancien LIVE (comparaison uniquement)** : conservé à titre diagnostic, potentiellement indisponible et non nécessaire pour la suite.
 
 Les tests A et B sont des VOD de référence : leur réussite ne valide pas un LIVE. Ils peuvent en revanche discriminer une incompatibilité liée au conteneur TS vs fMP4. Ne saisir aucun portail ni MAC dans ces tests.
+
+## Résultat confirmé sur téléviseur Hisense (5 novembre 2026)
+
+L'utilisateur a testé sur VIDAA :
+
+- **Témoin HLS VOD** : image et son confirmés.
+- **TEST A MPEG-TS 360p** : fonctionne sur la télévision.
+- **TEST B fMP4 360p** : fonctionne sur la télévision.
+- **Ancien LIVE Akamai** : erreur de format sur la télévision ; la playlist enfant avait renvoyé HTTP 404 lors du diagnostic externe.
+
+**Conclusion limitée :** le téléviseur accepte effectivement les deux conteneurs HLS testés avec vidéo et audio. Les tests A et B étant des VOD, ils ne démontrent pas encore la lecture d'une chaîne LIVE. Ils ne résolvent pas l'accès MAG au portail HTTP depuis un site HTTPS.
+
+### Contrôle technique supplémentaire
+
+Le script `scripts/verify-public-live.mjs` vérifie séparément des sources LIVE publiquement diffusées sur GitHub Actions (manifeste HLS, playlist média, segment reçu), **sans MAC, sans proxy ni données privées**. Une source vérifiée ainsi doit ensuite être validée devant la télévision, image et son. Les flux externes peuvent changer de disponibilité.
+
+## Test C/D : vrai direct France 24 (sans compte, sans serveur local)
+
+La CI GitHub du 5 novembre 2026 a tenté six sources publiques. Deux ont répondu avec une playlist de type LIVE (sans `#EXT-X-ENDLIST`) et avec les premiers octets d'un fragment MPEG-TS HTTP 206 : **France 24 français 500 kb/s, principal et secours**. Quatre autres sources n'ont pas passé les contrôles réseau au même instant.
+
+1. Actualiser le laboratoire public depuis le **navigateur de la Hisense**.
+2. Rubrique 4, bouton **TEST C : VRAI LIVE France 24 (500 kb/s)** ; constater l'image et le son sur TV.
+3. Si le C échoue, essayer **TEST D : LIVE France 24 (secours)** et noter le code erreur affiché.
+4. Arrêter le lecteur après le test.
+
+La vérification réseau sur GitHub ne prouve pas une lecture sur VIDAA ; les flux peuvent aussi changer entre les essais. La validation image/son doit être faite devant la TV. Ces flux publics ne se substituent pas à l'authentification du portail Stalker/MAG qui demeure un problème d'architecture distinct.
