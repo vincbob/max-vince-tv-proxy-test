@@ -21,7 +21,8 @@ function linkUrl(x){var raw=String(x&&(x.cmd||x.url||x.link||'')||'').trim();raw
 async function proxyOnly(){if(state.working)return;state.working=true;$('proxyTest').disabled=true;statusReset();$('log').textContent='';try{var u=proxyUrl('https://jsonplaceholder.typicode.com/todos/1',{'Accept':'application/json'});var r=await requestRaw(u);if(!r.ok)throw Error('HTTP_'+r.status);if(!/json/i.test(r.type)&&!r.text.trim().startsWith('{'))throw Error('REPONSE_PUBLIQUE_NON_JSON');stage(0,'OK HTTP '+r.status,'ok');log('Proxy public : HTTP '+r.status+' ; corps '+r.text.length+' caractères.');}catch(e){stage(0,'Échec','bad');log('Proxy public : '+safeError(e));}finally{state.working=false;$('proxyTest').disabled=false;}}
 function safeError(e){var msg=String(e&&e.message||'ERREUR_INCONNUE');return /^[A-Z0-9_]{3,100}$/.test(msg)?msg:'ERREUR_RESEAU';}
 async function realTest(){if(state.working)return;state.working=true;$('fullTest').disabled=true;statusReset();$('log').textContent='';try{
-if(!$('consent').checked)throw Error('CONSENTEMENT_PROXY_REQUIS');\nif($('provider').value==='public')throw Error('PROXY_PUBLIC_NE_PERMET_PAS_MAG');
+if(!$('consent').checked)throw Error('CONSENTEMENT_PROXY_REQUIS');
+if($('provider').value==='public')throw Error('PROXY_PUBLIC_NE_PERMET_PAS_MAG');
 state.endpoint=portalEndpoint($('portal').value);state.mac=validatedMac($('mac').value);
 if(!$('key').value.trim())throw Error('CLE_PROXY_MANQUANTE');
 stage(0,'Requête via proxy','');log('Envoi du handshake via proxy tiers (aucun secret affiché).');
