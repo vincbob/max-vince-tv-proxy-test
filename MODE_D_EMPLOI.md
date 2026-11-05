@@ -58,3 +58,15 @@ Ce test **ne dépend pas de ton portail**, n'envoie aucun identifiant et utilise
 Attention : le statut « Lecture démarrée » représente l'événement `playing` du lecteur HTML5. Il **ne certifie pas à lui seul l'image et le son** ; seule la vérification devant la télévision confirme ces deux points. Les sources HLS publiques peuvent changer ou tomber en panne.
 
 Les tests automatiques du dépôt simulent le navigateur et valident l'instrumentation, mais **ne sont pas des tests de décodage réel sur la télévision**. La lecture d'un flux public ne lève ni le problème HTTP/HTTPS du portail ni les restrictions CORS. Le dépôt MAX TV 08.8 existant demeure intact.
+
+## 5 novembre : comparaison HLS ciblée après le premier test TV
+
+Observation réelle rapportée : sur la Hisense, la vidéo témoin Mux a produit **image + son**. Le LIVE public Akamai a déclenché une erreur de format ; un contrôle externe a obtenu un manifeste maître valide, mais sa variante vidéo indiquée renvoyait HTTP 404. Ce symptôme n'établit pas une incompatibilité générale des LIVE avec VIDAA.
+
+Dans la rubrique 4 actualisée :
+
+1. **TEST A : HLS MPEG-TS 360p** : échantillon officiel Apple, H.264/AAC-LC avec segments TS ; vérifier image et son.
+2. **TEST B : HLS fMP4 360p** : échantillon officiel Apple, H.264/AAC-LC avec segments fMP4 ; vérifier image et son.
+3. **Ancien LIVE (comparaison uniquement)** : conservé à titre diagnostic, potentiellement indisponible et non nécessaire pour la suite.
+
+Les tests A et B sont des VOD de référence : leur réussite ne valide pas un LIVE. Ils peuvent en revanche discriminer une incompatibilité liée au conteneur TS vs fMP4. Ne saisir aucun portail ni MAC dans ces tests.
