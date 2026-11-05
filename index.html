@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAX &amp; VINCE TV - Connexion autonome / Proxy 01</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b0f16;color:#f4f4f4;font:20px Arial,sans-serif}header{background:#151b27;border-bottom:3px solid #ed792b;padding:22px 28px}h1{color:#ff933e;margin:0;font-size:32px}h2{font-size:23px;margin:10px 0}p{line-height:1.4}.subtitle{color:#b2bece;font-size:17px;margin-top:8px}.layout{max-width:1100px;margin:0 auto;padding:18px;display:grid;gap:18px}.panel{background:#161d29;border:1px solid #364354;border-radius:12px;padding:20px}.notice{border-left:5px solid #ff933e;padding:12px;background:#2b251e;font-size:17px}label{display:block;margin:12px 0 6px}input,select,button{font:inherit;border-radius:7px}input,select{width:100%;padding:13px;background:#101621;color:#f4f4f4;border:1px solid #67758c}input[type=checkbox]{width:22px;height:22px;vertical-align:middle;margin-right:10px}button{border:1px solid #e68b44;background:#a74c13;color:white;padding:14px 18px;cursor:pointer;margin:7px 8px 7px 0}button:disabled{opacity:.5}button:focus,input:focus,select:focus{outline:4px solid #ffcc47;outline-offset:3px}.row{display:flex;flex-wrap:wrap;gap:10px}.stage{display:flex;justify-content:space-between;border-bottom:1px solid #3a4555;padding:12px 0;font-size:18px}.stage strong{color:#ffb15e}.muted{color:#b6c0cc;font-size:16px}.ok{color:#6febac!important}.bad{color:#ff8585!important}#log{white-space:pre-wrap;min-height:120px;max-height:240px;overflow:auto;font:16px/1.5 monospace;background:#0b1018;padding:16px;border-radius:8px}video{width:100%;max-height:380px;background:black;display:none}a{color:#fdad66}@media(max-width:640px){body{font-size:16px}h1{font-size:24px}.layout{padding:10px}}
+</style>
+</head>
+<body>
+<header><h1>MAX &amp; VINCE TV <small>· Proxy 01</small></h1><div class="subtitle">Laboratoire réel de connexion Stalker/MAG depuis la télévision · indépendant du PC</div></header>
+<main class="layout">
+<section class="panel"><h2>1. Connexion</h2>
+<p class="notice">Ce prototype utilise un <b>proxy CORS tiers</b>. Son exploitant peut voir l'adresse du portail, la MAC autorisée et le jeton Stalker transmis. Utilise uniquement un accès dont tu acceptes cette exposition. Il n'y a ni serveur Windows, ni sauvegarde des identifiants dans le dépôt GitHub. L'offre gratuite peut refuser les en-têtes MAG ou la vidéo.</p>
+<label for="provider">Proxy</label><select id="provider"><option value="io">corsproxy.io</option><option value="dev">corsproxy.dev</option></select>
+<label for="key">Clé API du proxy (pas le mot de passe IPTV)</label><input id="key" type="password" autocomplete="off" placeholder="Clé du proxy">
+<label for="portal">URL du portail Stalker/MAG autorisé</label><input id="portal" type="url" autocomplete="off" placeholder="https://exemple.invalid/stalker_portal/c/">
+<label for="mac">MAC virtuelle autorisée</label><input id="mac" type="text" autocomplete="off" placeholder="00:11:22:33:44:55">
+<label><input id="consent" type="checkbox">J'accepte de transmettre temporairement ces données au proxy tiers.</label>
+<div class="row"><button id="proxyTest">Tester le proxy sans identifiants</button><button id="fullTest">Connexion réelle et catalogue</button><button id="watch" disabled>Essayer le LIVE</button><button id="clear">Effacer les champs</button></div>
+<p class="muted">Les données restent dans ce formulaire pendant l'ouverture de la page. Ne publie jamais d'identifiants dans GitHub, et ne photographie pas les champs remplis.</p></section>
+<section class="panel"><h2>2. Résultat du parcours</h2>
+<div class="stage"><span>Proxy / CORS</span><strong id="s0">Non testé</strong></div>
+<div class="stage"><span>Handshake Stalker</span><strong id="s1">Non testé</strong></div>
+<div class="stage"><span>Profil</span><strong id="s2">Non testé</strong></div>
+<div class="stage"><span>Catalogue LIVE</span><strong id="s3">Non testé</strong></div>
+<div class="stage"><span>Lien de lecture LIVE</span><strong id="s4">Non testé</strong></div>
+<div class="stage"><span>Image / son</span><strong id="s5">Non testé</strong></div>
+<h2>Journal sans secrets</h2><div id="log" role="status" aria-live="polite">Aucune connexion lancée.</div>
+<video id="video" controls playsinline></video>
+</section>
+</main>
+<script src="proxy-lab.js"></script>
+</body></html>
