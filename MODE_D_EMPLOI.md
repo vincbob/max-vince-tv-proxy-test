@@ -96,3 +96,9 @@ La CI GitHub du 5 novembre 2026 a tenté six sources publiques. Deux ont répond
 4. Arrêter le lecteur après le test.
 
 La vérification réseau sur GitHub ne prouve pas une lecture sur VIDAA ; les flux peuvent aussi changer entre les essais. La validation image/son doit être faite devant la TV. Ces flux publics ne se substituent pas à l'authentification du portail Stalker/MAG qui demeure un problème d'architecture distinct.
+
+## Résultat VIDEO C/D et décision proxy (5 novembre 2026)
+
+L'utilisateur confirme que le LIVE France 24 **TEST C et TEST D n'a rien affiché**, tandis que les vidéos témoins et tests HLS A/B fonctionnent encore. Cette divergence invalide toute affirmation selon laquelle un LIVE est déjà fonctionnel sur VIDAA. Les premiers octets reçus depuis GitHub Actions ne constituent pas une validation TV.
+
+Étude des proxies gratuits, cookies interdits dans Fetch, options auto-hébergées et contraintes de coût : [docs/DECISION_PROXY_STALKER_20261105.md](docs/DECISION_PROXY_STALKER_20261105.md). **Aucun déploiement distant n'a été entrepris.**
