@@ -5,6 +5,8 @@
   var $ = function (id) { return document.getElementById(id); };
   var sources = {
     vod: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+    ts360: 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/v3/prog_index.m3u8',
+    mp4360: 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/v3/prog_index.m3u8',
     live: 'https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8'
   };
   var v = $('mediaTestVideo'), active = '', started = false, hasFrames = false;
@@ -39,8 +41,8 @@
     v.muted = false;
     try { v.volume = 1; } catch (e) {}
     status('Chargement du flux public...', '');
-    note((kind === 'live' ? 'Flux LIVE de démonstration' : 'Vidéo de démonstration') +
-      '. ' + capabilities() + '. Vérifie toi-même image et son : les événements HTML5 ne peuvent pas les confirmer seuls.');
+    var description = {vod: 'Témoin HLS déjà validé', ts360: 'HLS MPEG-TS 360p - AVC / AAC-LC', mp4360: 'HLS fMP4 360p - AVC / AAC-LC', live: 'Ancien LIVE public 1080p - source suspecte (playlist secondaire HTTP 404)'}[kind];
+    note(description + '. ' + capabilities() + '. Les tests 360p sont des vidéos à la demande, PAS du LIVE. Vérifie image et son.');
     v.src = sources[kind];
     try {
       v.load();
@@ -81,7 +83,9 @@
     if (!active) return;
     var code = v.error && Number.isInteger(v.error.code) ? v.error.code : 'inconnu';
     status('Échec du lecteur (code ' + code + ')', 'bad');
-    note('Lecture impossible : format, réseau, compatibilité HLS ou source publique indisponible. Cela ne teste pas ton portail.');
+    note(code === 4 ?
+      'Code 4 : la source ou son format ne sont pas acceptés par le lecteur. Cela peut aussi signifier une variante HLS inaccessible (HTTP 404 vérifié sur le LIVE initial). Ce message ne prouve pas une panne du décodeur.' :
+      'Lecture impossible : réseau, format, ou source indisponible. Cela ne teste pas ton portail.');
   });
   v.addEventListener('waiting', function () {
     if (active && started) status('Mise en mémoire tampon', '');
@@ -93,6 +97,8 @@
     }
   });
   $('testHlsVod').addEventListener('click', function () { start('vod'); });
+  $('testHlsTs').addEventListener('click', function () { start('ts360'); });
+  $('testHlsFmp4').addEventListener('click', function () { start('mp4360'); });
   $('testHlsLive').addEventListener('click', function () { start('live'); });
   $('stopHls').addEventListener('click', function () { stop(true); });
 })();
