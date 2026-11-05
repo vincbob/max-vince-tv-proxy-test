@@ -5,14 +5,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 const source = fs.readFileSync(path.join(__dirname, '..', 'media-check.js'), 'utf8');
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-for (const id of ['mediaTestVideo','mediaResult','mediaLog','testHlsVod','testHlsLive','stopHls']) {
+for (const id of ['mediaTestVideo','mediaResult','mediaLog','testHlsVod','testHlsTs','testHlsFmp4','testHlsLive','stopHls']) {
   assert.match(html, new RegExp('id="' + id + '"'));
 }
 assert.match(html, /media-check\.js/);
 
 function env(playResult) {
   const controls = new Map();
-  for (const id of ['mediaTestVideo','mediaResult','mediaLog','testHlsVod','testHlsLive','stopHls']) {
+  for (const id of ['mediaTestVideo','mediaResult','mediaLog','testHlsVod','testHlsTs','testHlsFmp4','testHlsLive','stopHls']) {
     controls.set(id, {
       listeners:{}, textContent:'', className:'', style:{},
       addEventListener(name,fn){this.listeners[name]=fn;},
@@ -30,6 +30,8 @@ function env(playResult) {
 test('player only uses public HTTPS demo streams and not portal credentials',()=>{
   assert.match(source,/https:\/\/test-streams\.mux\.dev/);
   assert.match(source,/https:\/\/cph-p2p-msl\.akamaized\.net/);
+  assert.match(source,/img_bipbop_adv_example_ts\/v3\/prog_index\.m3u8/);
+  assert.match(source,/img_bipbop_adv_example_fmp4\/v3\/prog_index\.m3u8/);
   assert.doesNotMatch(source,/mac=|Bearer|token=|stalker_portal/i);
 });
 test('vod player starts on explicit button event; success needs human confirmation',()=>{
@@ -58,4 +60,22 @@ test('unhandled media play rejection is rendered without claiming success',async
   await Promise.resolve();
   await Promise.resolve();
   assert.match(t.result.textContent,/Lecture non démarrée/);
+});
+
+test('comparaison 360p TS et fMP4 selectionne deux sources distinctes',()=>{
+  const t=env();
+  t.btn('testHlsTs').trigger('click');
+  assert.match(t.video.src,/example_ts\/v3\/prog_index.m3u8/);
+  assert.match(t.log.textContent,/PAS du LIVE/);
+  t.btn('testHlsFmp4').trigger('click');
+  assert.match(t.video.src,/example_fmp4\/v3\/prog_index.m3u8/);
+  assert.match(t.log.textContent,/HLS fMP4 360p/);
+});
+test('erreur format ne prétend pas isoler le décodeur',()=>{
+  const t=env();
+  t.btn('testHlsLive').trigger('click');
+  t.video.error={code:4};
+  t.video.trigger('error');
+  assert.match(t.log.textContent,/source ou son format/);
+  assert.match(t.log.textContent,/ne prouve pas une panne du décodeur/);
 });
