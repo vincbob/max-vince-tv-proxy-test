@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAX &amp; VINCE TV - Compatibilité VIDAA 9</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0c1119;color:#f1f4f8;font:20px Arial,sans-serif;line-height:1.45}header{background:#1b2430;border-bottom:3px solid #ff963f;padding:20px}h1{margin:0;color:#ffb170;font-size:29px}main{max-width:860px;margin:auto;padding:18px}.card{background:#18212c;border:1px solid #4b5a6c;border-radius:12px;padding:20px;margin-bottom:18px}label{display:block;font-weight:600;margin-top:14px}input{width:100%;margin-top:7px;padding:14px;border:2px solid #8797a9;border-radius:8px;background:#101821;color:white;font-size:20px}button,a.back{background:#b65e21;color:white;font-size:20px;font-weight:600;border:0;border-radius:8px;padding:14px;margin-top:15px;display:inline-block;text-decoration:none}button:focus,a:focus,input:focus{outline:4px solid #ffd65e;outline-offset:2px}.muted{color:#c2ceda;font-size:17px}.notice{border-left:5px solid #ff963f;padding:12px;background:#30271e}.result{padding:16px;border-radius:8px;background:#101821;border:1px solid #708395;margin-top:16px}strong{color:#ffc58d}small{font-size:15px}a{color:#ffba83}
+</style></head>
+<body><header><h1>MAX &amp; VINCE TV · Compatibilité système VIDAA</h1>
+<div class="muted">Diagnostic documentaire, sans modification de la télévision</div></header>
+<main><section class="card">
+<h2>Identifier ton modèle</h2>
+<p class="notice">Ce contrôle ne cherche pas à installer un programme et n'appelle aucune fonction système de la télévision. Il compare uniquement les informations que tu saisis avec des observations publiques. Aucune donnée n'est envoyée ni enregistrée.</p>
+<p>Sur la Hisense, consulte <strong>Paramètres → Assistance / À propos → Informations système</strong> (le chemin exact varie suivant le modèle). Note le modèle et le firmware.</p>
+<label for="model">Modèle exact de la TV</label>
+<input id="model" autocomplete="off" placeholder="Exemple : 55A60LEVS">
+<label for="firmware">Version du logiciel / firmware (facultatif)</label>
+<input id="firmware" autocomplete="off" placeholder="Exemple : 09.60V.Q0612">
+<button id="compare" type="button">Comparer avec les rapports publiés</button>
+<div class="result" id="result" role="status" aria-live="polite">Aucune comparaison lancée.</div>
+</section>
+<section class="card">
+<h2>Ce que ce contrôle ne peut pas prouver</h2>
+<p>Les installations de tuiles Sidee ne démontrent pas la possibilité d'exécuter du code natif. Même si un autre téléviseur du même modèle a été étudié, son firmware peut être différent. Aucun accès administrateur, installation native ou déverrouillage n'est validé par cette page.</p>
+<a class="back" href="./">Retour aux tests MAX &amp; VINCE TV</a>
+</section></main>
+<script src="./vidaa-compatibilite.js"></script></body></html>
