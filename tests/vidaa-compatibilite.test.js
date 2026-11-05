@@ -36,11 +36,32 @@ test('Hisense 58E77Q : reconnait V0000.09.60V.Q0612 sans promettre de compatibil
  nodes.get('compare').listeners.click();
  const output=nodes.get('result').textContent;
  assert.match(output,/VIDAA U9/);
- assert.match(output,/écriture bloquée/);
+ assert.match(output,/accès système bloqué/);
  assert.match(output,/version documentée/);
- assert.match(output,/Aucune installation native indépendante validée/);
+ assert.match(output,/Aucune méthode native validée/);
  nodes.get('model').value='MODELE-INCONNU';
  nodes.get('compare').listeners.click();
  assert.match(nodes.get('result').textContent,/firmware 09\.60V\.Q0612 est documenté/);
  assert.match(nodes.get('result').textContent,/Même firmware ne signifie pas/);
+});
+
+test('Le 58E77Q est reconnu avec MT9603 probable, sans validation d’installation native',()=>{
+ const nodes=new Map();
+ for(const id of ['model','firmware','compare','result']){
+  nodes.set(id,{value:'',textContent:'',listeners:{},addEventListener(type,fn){this.listeners[type]=fn;}});
+ }
+ vm.runInNewContext(js,{document:{getElementById:id=>nodes.get(id)}});
+ nodes.get('model').value='58E77Q';
+ nodes.get('firmware').value='V0000.09.60V.Q0612';
+ nodes.get('compare').listeners.click();
+ const value=nodes.get('result').textContent;
+ assert.match(value,/MT9603 très probable/);
+ assert.match(value,/55A60LEVS/);
+ assert.match(value,/09\.60W\.Q0612/);
+ assert.match(value,/Aucune méthode native validée/);
+});
+test('Le comparatif souligne explicitement la différence entre variantes V et W',()=>{
+ assert.match(js,/n.est pas transposable au firmware 09\.60V\.Q0612/);
+ assert.match(html,/n'a pas été lu directement/);
+ assert.doesNotMatch(js,/\bfetch\s*\(|\bXMLHttpRequest\b|\bWebSocket\b/);
 });
