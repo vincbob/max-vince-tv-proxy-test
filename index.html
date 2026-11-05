@@ -11,13 +11,13 @@
 <header><h1>MAX &amp; VINCE TV <small>· Proxy 01</small></h1><div class="subtitle">Laboratoire réel de connexion Stalker/MAG depuis la télévision · indépendant du PC</div></header>
 <main class="layout">
 <section class="panel"><h2>1. Connexion</h2>
-<p class="notice">Ce prototype utilise un <b>proxy CORS tiers</b>. Son exploitant peut voir l'adresse du portail, la MAC autorisée et le jeton Stalker transmis. Utilise uniquement un accès dont tu acceptes cette exposition. Il n'y a ni serveur Windows, ni sauvegarde des identifiants dans le dépôt GitHub. L'offre gratuite peut refuser les en-têtes MAG ou la vidéo.</p>
-<label for="provider">Proxy</label><select id="provider"><option value="io">corsproxy.io</option><option value="dev">corsproxy.dev</option></select>
+<p class="notice">Ce prototype utilise un <b>proxy CORS tiers</b>. Son exploitant peut voir l'adresse du portail, la MAC autorisée et le jeton Stalker transmis. Utilise uniquement un accès dont tu acceptes cette exposition. Il n'y a ni serveur Windows, ni sauvegarde des identifiants dans le dépôt GitHub. L'offre gratuite peut refuser les en-têtes MAG ou la vidéo. Le mode cors.dev gratuit est réservé au test public sans identifiants.</p>
+<label for="provider">Proxy</label><select id="provider"><option value="public">cors.dev gratuit (test public sans clé)</option><option value="io">corsproxy.io (clé API nécessaire)</option><option value="dev">corsproxy.dev (clé API nécessaire)</option></select>
 <label for="key">Clé API du proxy (pas le mot de passe IPTV)</label><input id="key" type="password" autocomplete="off" placeholder="Clé du proxy">
 <label for="portal">URL du portail Stalker/MAG autorisé</label><input id="portal" type="url" autocomplete="off" placeholder="https://exemple.invalid/stalker_portal/c/">
 <label for="mac">MAC virtuelle autorisée</label><input id="mac" type="text" autocomplete="off" placeholder="00:11:22:33:44:55">
 <label><input id="consent" type="checkbox">J'accepte de transmettre temporairement ces données au proxy tiers.</label>
-<div class="row"><button id="proxyTest">Tester le proxy sans identifiants</button><button id="fullTest">Connexion réelle et catalogue</button><button id="watch" disabled>Essayer le LIVE</button><button id="clear">Effacer les champs</button></div>
+<div class="row"><button id="proxyTest">Tester le proxy sans clé ni identifiants</button><button id="fullTest">Connexion réelle et catalogue</button><button id="watch" disabled>Essayer le LIVE</button><button id="clear">Effacer les champs</button></div>
 <p class="muted">Les données restent dans ce formulaire pendant l'ouverture de la page. Ne publie jamais d'identifiants dans GitHub, et ne photographie pas les champs remplis.</p></section>
 <section class="panel"><h2>2. Résultat du parcours</h2>
 <div class="stage"><span>Proxy / CORS</span><strong id="s0">Non testé</strong></div>
