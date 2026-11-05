@@ -32,3 +32,15 @@ Le service gratuit peut bloquer ou supprimer l'en-tête Cookie et la vidéo. Un 
 - Le LAB vérifie handshake, profil, première page du catalogue, `create_link` et lecture HTML5 si les étapes précédentes réussissent.
 - La version historique **08.8 Windows** n'est pas modifiée.
 - Les tests automatisés ne sont pas une validation sur le téléviseur.
+
+## Nouveau test direct VIDAA (sans proxy et sans MAC)
+
+Le PC et la Hisense ont déjà obtenu HTTP 200 avec le proxy public sur une API de démonstration. Ce test est différent : il tente une requête **directe au portail HTTPS autorisé**, sans cookie, sans MAC, sans jeton et sans clé.
+
+1. Ouvrir le laboratoire GitHub Pages et descendre à la rubrique **3. Test direct depuis VIDAA, sans proxy**.
+2. Saisir personnellement l'adresse HTTPS du portail autorisé (elle n'est ni enregistrée dans le dépôt, ni affichée dans le journal).
+3. Cliquer **Tester l'accès direct, sans MAC**.
+4. Lire le statut et le code diagnostic. Une réponse HTTP 200/403/404 indique une réponse lisible dans le navigateur, mais **pas une authentification MAG réussie**. Un échec réseau/CORS/TLS est impossible à attribuer à une seule cause avec les seules API du navigateur.
+5. Ne pas photographier les champs renseignés. Utiliser le bouton **Effacer l'adresse**.
+
+Depuis une page GitHub Pages HTTPS, un portail HTTP est bloqué par les règles de contenu mixte du navigateur : le test le signale sans envoyer la requête. Aucun serveur payant n'est créé et l'application historique n'est pas modifiée.

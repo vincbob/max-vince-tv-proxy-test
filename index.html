@@ -29,6 +29,16 @@
 <h2>Journal sans secrets</h2><div id="log" role="status" aria-live="polite">Aucune connexion lancée.</div>
 <video id="video" controls playsinline></video>
 </section>
+
+<section class="panel" id="directPanel"><h2>3. Test direct depuis VIDAA, sans proxy</h2>
+<p class="notice">Ce test vérifie uniquement si ton portail HTTPS peut répondre directement au navigateur de la télévision. <b>Il ne transmet aucune MAC, aucun jeton ni clé</b>, ne contacte aucun proxy tiers et ne valide pas la lecture LIVE. L'adresse n'est pas enregistrée et n'apparaît pas dans le journal.</p>
+<label for="directPortal">Adresse HTTPS du portail autorisé (ne la partage pas en photo)</label>
+<input id="directPortal" type="url" autocomplete="off" spellcheck="false" placeholder="https://exemple.invalid/stalker_portal/c/">
+<div class="row"><button id="directTest">Tester l'accès direct, sans MAC</button><button id="directClear">Effacer l'adresse</button></div>
+<div class="stage"><span>Connexion directe depuis ce navigateur</span><strong id="directResult">Non testé</strong></div>
+<p class="muted" id="directLog">En attente. Un résultat HTTP indique une réponse lisible, pas une authentification MAG réussie. Un échec peut venir de CORS, du réseau, du certificat TLS ou d'un filtrage.</p>
+</section>
 </main>
 <script src="proxy-lab.js"></script>
+<script src="direct-check.js"></script>
 </body></html>

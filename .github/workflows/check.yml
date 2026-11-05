@@ -14,6 +14,8 @@ jobs:
         with:
           node-version: '22'
       - name: Valider la syntaxe JavaScript
-        run: node --check proxy-lab.js
+        run: |
+          node --check proxy-lab.js
+          node --check direct-check.js
       - name: Simuler le navigateur sans secrets
-        run: node --test tests/proxy-lab.test.js
+        run: node --test tests/proxy-lab.test.js tests/direct-check.test.js
