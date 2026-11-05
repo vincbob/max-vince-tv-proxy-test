@@ -17,5 +17,6 @@ jobs:
         run: |
           node --check proxy-lab.js
           node --check direct-check.js
+          node --check media-check.js
       - name: Simuler le navigateur sans secrets
-        run: node --test tests/proxy-lab.test.js tests/direct-check.test.js
+        run: node --test tests/proxy-lab.test.js tests/direct-check.test.js tests/media-check.test.js
