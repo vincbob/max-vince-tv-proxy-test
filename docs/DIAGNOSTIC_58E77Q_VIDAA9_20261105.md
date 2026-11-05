@@ -48,3 +48,28 @@ Inventaire du projet : https://github.com/carteakey/alvidaa/blob/main/docs/resea
 4. Conserver l'application MAX TV existante et le dépôt historique ; ce rapport est isolé dans le laboratoire public.
 
 Ce rapport est un état des preuves, pas un guide de déverrouillage.
+
+## Nouvel élément indépendant (5 novembre 2026) : un autre téléviseur avec EXACTEMENT le même firmware
+Projet source : https://github.com/ipanalytics/Hisense-Vidaa-Reverse-Engineering
+
+Un **65Q60SEVS_01** européen a été analysé avec **MTK9603**, version **V0000.09.60V.Q0612**, région EU_A et navigateur Chromium 111.
+C'est un rapprochement bien plus solide que celui d'un autre modèle sous 09.60W.
+
+Les auteurs ont documenté :
+- Une surface JavaScript exposant environ 96 fonctions, principalement des getters d'informations et de contrôle d'interface.
+- Dans le navigateur de cet appareil, les anciennes fonctions `Hisense_installApp` et `Hisense_FileRead` ne sont pas exposées.
+- Un service natif local avec des fonctions de gestion ; certaines opérations de modification sont **refusées par le contrôle de permissions appconfig**.
+- Un firmware de mise à jour **signé et chiffré** ; aucune installation native indépendante n'a été réalisée sur cet appareil dans cette étude.
+- Leurs constats sont valables sur **65Q60SEVS_01**, et ne prouvent pas que le **58E77Q** expose le même ensemble exact de fonctions.
+
+Documentation primaire :
+https://github.com/ipanalytics/Hisense-Vidaa-Reverse-Engineering/blob/main/docs/05-bridge-surface.md
+https://github.com/ipanalytics/Hisense-Vidaa-Reverse-Engineering/blob/main/docs/08-function-map.md
+https://github.com/ipanalytics/Hisense-Vidaa-Reverse-Engineering/blob/main/docs/06-negative-results.md
+
+### Mesure disponible dans notre laboratoire
+La page `vidaa-compatibilite.html` dispose maintenant d'un bouton **« Analyser les fonctions visibles (lecture seule) »**.
+Il ne fait qu'examiner la présence de noms JavaScript (`HiUtils_createRequest`, `vowOS`, `Hisense_installApp`, etc.) et le numéro majeur Chromium ; il n'appelle aucune fonction privilégiée et n'envoie aucune donnée.
+Son résultat peut distinguer les surfaces JS visibles sur notre 58E77Q de celles rapportées pour le 65Q60SEVS_01.
+
+**État : aucun accès natif, installation, permission ou déverrouillage encore validé sur notre TV.**
