@@ -25,3 +25,22 @@ test('Compare le modèle et avertit sur les versions de firmware divergentes',()
  nodes.get('compare').listeners.click();
  assert.match(nodes.get('result').textContent,/aucune correspondance/);
 });
+test('Hisense 58E77Q : reconnait V0000.09.60V.Q0612 sans promettre de compatibilité native',()=>{
+ const nodes=new Map();
+ for(const id of ['model','firmware','compare','result']){
+  nodes.set(id,{value:'',textContent:'',listeners:{},addEventListener(type,fn){this.listeners[type]=fn;}});
+ }
+ vm.runInNewContext(js,{document:{getElementById:id=>nodes.get(id)}});
+ nodes.get('model').value='58E77Q';
+ nodes.get('firmware').value='V0000.09.60V.Q0612';
+ nodes.get('compare').listeners.click();
+ const output=nodes.get('result').textContent;
+ assert.match(output,/VIDAA U9/);
+ assert.match(output,/écriture bloquée/);
+ assert.match(output,/version documentée/);
+ assert.match(output,/Aucune installation native indépendante validée/);
+ nodes.get('model').value='MODELE-INCONNU';
+ nodes.get('compare').listeners.click();
+ assert.match(nodes.get('result').textContent,/firmware 09\.60V\.Q0612 est documenté/);
+ assert.match(nodes.get('result').textContent,/Même firmware ne signifie pas/);
+});
