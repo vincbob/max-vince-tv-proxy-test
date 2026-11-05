@@ -44,3 +44,17 @@ Le PC et la Hisense ont déjà obtenu HTTP 200 avec le proxy public sur une API 
 5. Ne pas photographier les champs renseignés. Utiliser le bouton **Effacer l'adresse**.
 
 Depuis une page GitHub Pages HTTPS, un portail HTTP est bloqué par les règles de contenu mixte du navigateur : le test le signale sans envoyer la requête. Aucun serveur payant n'est créé et l'application historique n'est pas modifiée.
+
+## Test 04 : lecture vidéo réelle avec image et son sur VIDAA
+
+Ce test **ne dépend pas de ton portail**, n'envoie aucun identifiant et utilise uniquement des flux HLS de démonstration HTTPS.
+
+1. Ouvrir le navigateur Internet de la Hisense, puis le laboratoire GitHub Pages. Actualiser la page.
+2. Descendre à **4. Test image et son depuis la Hisense : flux publics**.
+3. Cliquer **Essayer la vidéo témoin (image + son)**, et constater physiquement si une vidéo s'affiche et si du son est audible.
+4. Cliquer ensuite **Essayer un LIVE public** : il s'agit d'un flux de démonstration non lié à Stalker. Vérifier image, son et stabilité.
+5. Utiliser **Arrêter la lecture** pour libérer le lecteur. Prendre une photo du statut et du lecteur, sans aucune adresse ni identifiant privés.
+
+Attention : le statut « Lecture démarrée » représente l'événement `playing` du lecteur HTML5. Il **ne certifie pas à lui seul l'image et le son** ; seule la vérification devant la télévision confirme ces deux points. Les sources HLS publiques peuvent changer ou tomber en panne.
+
+Les tests automatiques du dépôt simulent le navigateur et valident l'instrumentation, mais **ne sont pas des tests de décodage réel sur la télévision**. La lecture d'un flux public ne lève ni le problème HTTP/HTTPS du portail ni les restrictions CORS. Le dépôt MAX TV 08.8 existant demeure intact.

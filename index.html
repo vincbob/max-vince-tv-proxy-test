@@ -38,7 +38,17 @@
 <div class="stage"><span>Connexion directe depuis ce navigateur</span><strong id="directResult">Non testé</strong></div>
 <p class="muted" id="directLog">En attente. Un résultat HTTP indique une réponse lisible, pas une authentification MAG réussie. Un échec peut venir de CORS, du réseau, du certificat TLS ou d'un filtrage.</p>
 </section>
+
+<section class="panel" id="mediaPanel">
+<h2>4. Test image et son depuis la Hisense : flux publics</h2>
+<p class="notice">Ce test lit un flux vidéo HLS de démonstration avec le lecteur natif du navigateur VIDAA. <b>Aucune MAC, aucun portail IPTV et aucun proxy</b> ne sont utilisés. Le résultat permet de vérifier le lecteur vidéo, mais ne valide pas encore les chaînes de ton portail.</p>
+<div class="row"><button id="testHlsVod">Essayer la vidéo témoin (image + son)</button><button id="testHlsLive">Essayer un LIVE public</button><button id="stopHls">Arrêter la lecture</button></div>
+<div class="stage"><span>Lecteur HLS natif sur cette télévision</span><strong id="mediaResult">Non testé</strong></div>
+<p class="muted" id="mediaLog" role="status" aria-live="polite">Lance une vidéo avec la télécommande. Si la lecture démarre, confirme toi-même l'image et le son : un statut logiciel ne peut pas garantir qu'ils sont perceptibles.</p>
+<video id="mediaTestVideo" controls playsinline preload="none" style="display:block;width:100%;max-height:440px;background:#000" aria-label="Lecteur vidéo de démonstration"></video>
+</section>
 </main>
 <script src="proxy-lab.js"></script>
 <script src="direct-check.js"></script>
+<script src="media-check.js"></script>
 </body></html>
